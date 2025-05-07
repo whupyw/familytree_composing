@@ -1,0 +1,157 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <title>{{GENE_NAME}} - 族谱</title>
+    <style>
+        /* 基础重置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* 页面容器 */
+        .page {
+            width: 210mm; 
+            height: 297mm; 
+            padding: 20mm 15mm; 
+            margin: 0 auto;
+            background: white;
+            position: relative;
+            font-family: "宋体", SimSun, serif;
+            border: 2mm double #8B0000;
+            outline: 1mm solid #aaa; 
+            box-shadow: none; 
+        }
+
+        /* 版心区域 */
+        .columns-container {
+            width: 180mm; 
+            height: 230mm;
+            margin: 0 auto;
+            border: 1.5mm double #8B0000; 
+            outline: 0.8mm solid #8B0000; 
+            padding: 2mm;
+        }
+
+        .columns-grid {
+            display: grid;
+            grid-template-columns: repeat(16, 1fr);
+            width: 100%;
+            height: 100%;
+            grid-auto-flow: column-reverse;
+        }
+
+
+        /* 列基础样式 */
+        .column {
+            writing-mode: vertical-rl;
+            text-orientation: upright;
+            padding: 0 1.5mm;
+            font-size: 13pt;
+            line-height: 1.6;
+            height: 100%;
+            border-right: 0.3mm solid #e0e0e0;
+            overflow: hidden;
+            white-space: nowrap; 
+        }
+
+            .column span.relation {
+                color: #8B0000;
+                font-size: 10pt;
+                font-weight: normal;
+                margin-inline-end: 0.5em;
+            }
+
+            .column span.member-name {
+                color: #000;
+                font-size: 15pt;
+                font-family: "SimHei", sans-serif;
+                font-weight: bold;
+            }
+
+        /* 世代标记列 */
+        .generation-column .column-inner {
+            color: #8B0000;
+            font-weight: 700;
+            font-size: 16pt;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            border-right: none;
+        }
+
+        /* 人物信息列 */
+        .member-column div:first-child {
+            color: #444;
+            font-size: 12pt;
+            margin-bottom: 4mm;
+        }
+
+        .spouse-column {
+            color: #666;
+        }
+
+            .spouse-column div:first-child {
+                color: #8B0000;
+            }
+
+
+        /* 页眉样式 */
+        .genealogy-header {
+            color: #8B0000;
+            text-align: center;
+            font-size: 24pt;
+            padding-bottom: 5mm;
+            margin-bottom: 5mm;
+        }
+
+        /* 页脚样式 */
+        .page-footer {
+            position: absolute;
+            bottom: 15mm;
+            width: 180mm;
+            text-align: center;
+            font-size: 12pt;
+            padding-top: 2mm;
+        }
+
+        @page {
+            size: A4 portrait;
+            margin: 0;
+        }
+
+        @media print {
+            .page {
+                margin: 0;
+                border: none;
+                box-shadow: none;
+                page-break-after: always;
+            }
+
+            .columns-container {
+                border: none;
+            }
+        }
+
+        .column :where(p, div) {
+            text-spacing: none;
+            hanging-punctuation: allow-end;
+            line-break: strict;
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <header class="genealogy-header">{{GENE_NAME}}</header>
+        <div class="columns-container">
+            <div class="columns-grid">
+                {{COLUMNS_CONTENT}}
+            </div>
+        </div>
+        <footer class="page-footer">第 {{PAGE_NUMBER}} 页</footer>
+    </div>
+</body>
+</html>
